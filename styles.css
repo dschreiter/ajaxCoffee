@@ -1,0 +1,12 @@
+.container {
+    width: 650px auto;
+    margin-left:150px;
+}
+div {
+    padding: 5px;
+}
+#orders li{
+    background-color:#eee;
+    margin:10px;
+    width:200px;
+}
