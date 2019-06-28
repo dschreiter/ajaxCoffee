@@ -1,5 +1,7 @@
 
-//http://rest.learncode.academy/
+
+// API: http://rest.learncode.academy/
+// this example: http://rest.learncode.academy/api/dsTest/coffee
 
 $(function () {
     /*
@@ -20,64 +22,42 @@ $(function () {
         });
     */
 
-    //Add
-    $('#add-order').on('click', function () {
-        fetch('http://rest.learncode.academy/api/dsTest/coffee', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    name: "david",
-                    drink: "mocha"
-                }),
-            })
-            .then(response => response.json()) // response.json() returns a promise
-            .then((response) => {
-                console.log("You saved this item", response); //returns the new item along with its ID
-            })
-
-    });
-/*
-    //update
-    $('#update-order').on('click', function () {
-        ;
-        fetch('http://rest.learncode.academy/api/johnbob/friends/5ac29306272a180100ebc760', {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    name: "Batman",
-                    age: 36
-                }),
-            })
-            .then((response) => {
-                console.log("Update success!", response.status); //returns 200 ok
-            })
-    });
-
-    //delete
-    $('#delete-order').on('click', function () {
-        ;
-        fetch('http://rest.learncode.academy/api/johnbob/friends/5ac29306272a180100ebc760', {
-                method: "DELETE",
-            })
-            .then((response) => {
-                console.log("Deleted!", response.status); //returns 200 ok
-            })
-    });
+    //Add -- send to API
+    $("#add-order").on("click", function() {
+        console.log("Click!!!");
+        var name = $("#name").val();
+        var drink = $("#drink").val();
+        fetch("http://rest.learncode.academy/api/dsTest/coffee", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            name: name,
+            drink: drink
+          })
+        })
+          .then(response => response.json()) // response.json() returns a promise
+          .then(response => {
+            console.log("You saved this item", response); //returns the new item along with its ID
+          });
+      });
 
 
+    //retrieve info from API
+    var orders;
+    $("#update-order").on("click", function() {
+        fetch("http://rest.learncode.academy/api/dsTest/coffee")
+          .then(response => response.json()) // response.json() returns a promise
+          .then(response => {
+            console.log("I have drink orders!", response); //returns all of johnbob's friends
+            orders = response;
+            orders.forEach(element => {
+              console.log(element);
+            });
+          });
+      });
 
-    //read current 
-    $(function () {
-        fetch('http://rest.learncode.academy/api/johnbob/friends/5ac29306272a180100ebc760')
-            .then(response => response.json()) // response.json() returns a promise
-            .then((response) => {
-                console.log("I got a friend!", response); //returns all of johnbob's friends
-            })
-    });
-*/
+
 
 });
